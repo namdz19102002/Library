@@ -33,6 +33,11 @@ void Admin::removeBook(Book* b)
 			listBook.erase(listBook.begin() + i);
 			break;
 		}
+		
+		
+		
+		
+		sndnasndnasndnasnqhwehjqjwe
 	}
 	cout << "That book has been removed" << endl;
 }
