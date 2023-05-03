@@ -108,16 +108,18 @@ int main() {
 	int cID;
 
 	Book* b = new Book();
-	Book* book01 = new Book("math", "1234", "manh", 12, 2);
-	Book* book02 = new Book("physic", "2345", "manh", 12, 2);
+	Book* book01 = new Book("math", "1234", "manh", 120, 30);
+	Book* book02 = new Book("physic", "2345", "manh", 110, 20);
+	Book* book03 = new Book("chemistry", "3456", "manh", 100, 10);
 	admin01->addBook(book01);
 	admin01->addBook(book02);
-	admin01->bookInfo(admin01->searchByTitle("math"));
+	admin01->addBook(book03);
+	
 	string title;
 	string serial;
 	string author;
 	int pC, fC;
-
+	
 	Menu* currentMenu = mainMenu;
 	while (true) {
 		currentMenu->displayMenu();
@@ -129,15 +131,20 @@ int main() {
 		case EXIT:
 			break;
 		case READ:
-
+			currentMenu->displayMenu();
+			admin01->read();
+			currentMenu = mainMenu;
 			break;
 		case TITLE:
 			currentMenu->displayMenu();
 			cin.ignore();
-			cout << "Enter the book's title to search: ";
-			getline(cin, title);
+			cout << "Enter the book's title to search: "; getline(cin, title);
 			if (admin01->searchByTitle(title) != nullptr && admin01->searchByTitle(title)->getAvailabilityStatus() == true) {
 				cout << "This book exists in our library" << endl;
+				cout << "Title: " << admin01->searchByTitle(title)->getTitle() << endl;
+				cout << "Serial: " << admin01->searchByTitle(title)->getSerial() << endl;
+				cout << "Author name: " << admin01->searchByTitle(title)->getAuthorName() << endl;
+				cout << "Number of pages: " << admin01->searchByTitle(title)->getPageCount() << endl;
 			}
 			else {
 				cout << "Sorry! We don't have that book" << endl;
@@ -148,8 +155,12 @@ int main() {
 			currentMenu->displayMenu();
 			cin.ignore();
 			cout << "Enter the book'serial: "; getline(cin, serial);
-			if (admin01->searchByTitle(title) != nullptr && admin01->searchByTitle(title)->getAvailabilityStatus() == true) {
+			if (admin01->searchBySerial(serial) != nullptr && admin01->searchBySerial(serial)->getAvailabilityStatus() == true) {
 				cout << "This book exists in our library" << endl;
+				cout << "Title: " << admin01->searchBySerial(serial)->getTitle() << endl;
+				cout << "Serial: " << admin01->searchBySerial(serial)->getSerial() << endl;
+				cout << "Author name: " << admin01->searchBySerial(serial)->getAuthorName() << endl;
+				cout << "Number of pages: " << admin01->searchBySerial(serial)->getPageCount() << endl;
 			}
 			else {
 				cout << "Sorry! We don't have that book" << endl;
